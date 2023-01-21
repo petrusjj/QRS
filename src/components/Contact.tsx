@@ -7,7 +7,6 @@ const VCards = (props: Props) => {
   const downloadContact = useCallback(async () => {
     const response = await API.get("qrsapi", "/downloadcontact", {});
     console.log(1337, "data", response);
-    alert(response);
   }, []);
 
   return (

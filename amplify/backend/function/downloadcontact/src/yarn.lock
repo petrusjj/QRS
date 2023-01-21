@@ -6,3 +6,13 @@
   version "8.10.109"
   resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-8.10.109.tgz#2f434cbfafe083529e365fe9c114787827a169a8"
   integrity sha512-/ME92FneNyXQzrAfcnQQlW1XkCZGPDlpi2ao1MJwecN+6SbeonKeggU8eybv1DfKli90FAVT1MlIZVXfwVuCyg==
+
+"@types/vcards-js@^2.10.2":
+  version "2.10.2"
+  resolved "https://registry.yarnpkg.com/@types/vcards-js/-/vcards-js-2.10.2.tgz#d5cda40d708132edf0d9f150a0897c92ca2e49d4"
+  integrity sha512-GWWAsAwQhWlZP0meGEbB0RHpyCn8ckwDohsznxhpRlb5jWL9atirM8Vknn8oJfOcQzE7x3oq5GtgFKdSvvWl1g==
+
+vcards-js@^2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/vcards-js/-/vcards-js-2.10.0.tgz#70871c3c6f1f154ae0b4925d761bfe7ac2c8502a"
+  integrity sha512-nah+xbVInVJaO6+C5PEUqaougmv8BN8aa7ZCtmVQcX6eWIZGRukckFtseXSI7KD7/nXtwkJe624y42T0r+L+AQ==
