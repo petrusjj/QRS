@@ -1,12 +1,14 @@
 import { useCallback } from "react";
 import { API } from "aws-amplify";
+import { saveAs } from "file-saver";
 
 type Props = {};
 
 const VCards = (props: Props) => {
   const downloadContact = useCallback(async () => {
     const response = await API.get("qrsapi", "/downloadcontact", {});
-    console.log(1337, "data", response);
+    const blob = new Blob([response], { type: "text/vcard;charset=utf-8" });
+    saveAs(blob, "enesser.vcf");
   }, []);
 
   return (

@@ -7,10 +7,10 @@ var vCardsJS = require("vcards-js");
 exports.handler = async (event) => {
   console.log(`EVENT: ${JSON.stringify(event)}`);
 
-  //create a new vCard
+  // create a new vCard
   var vCard = vCardsJS();
 
-  //set properties
+  // set properties
   vCard.firstName = "Eric";
   vCard.middleName = "J";
   vCard.lastName = "Nesser";
@@ -25,20 +25,19 @@ exports.handler = async (event) => {
   vCard.url = "https://github.com/enesser";
   vCard.note = "Notes on Eric";
 
-  //save to file
-  vCard.saveToFile("./eric-nesser.vcf");
-
-  //get as formatted string
-  console.log(vCard.getFormattedString());
-
+  // get as formatted string
   const string = vCard.getFormattedString();
+
+  console.log(string);
 
   return {
     statusCode: 200,
     headers: {
+      "Content-Type": 'text/vcard; name="enesser.vcf"',
+      "Content-Disposition": 'inline; filename="enesser.vcf"',
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers": "*",
     },
-    body: JSON.stringify(string),
+    body: string,
   };
 };
