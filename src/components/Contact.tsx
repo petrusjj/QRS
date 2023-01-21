@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { API, Storage } from "aws-amplify";
-// import { saveAs } from "file-saver";
+import { saveAs } from "file-saver";
 
 const VCards = () => {
   useEffect(() => {
@@ -28,22 +28,37 @@ const VCards = () => {
     return a;
   };
 
-  // https://docs.amplify.aws/lib/storage/download/q/platform/js/#file-download-option
-  // https://www.reddit.com/r/learnprogramming/comments/ei9f2b/comment/fcp2ath/?utm_source=share&utm_medium=web2x&context=3
-  const downloadContact = useCallback(async () => {
-    await Storage.configure({ level: "public" });
-    const result = await Storage.get(`enesser.vcf`, { download: true });
-    console.log(result);
+  const downloadContactThroughAPIAndBlob = useCallback(async () => {
+    const response = await API.get("qrsapi", "/downloadcontact", {});
+    const blob = new Blob([response], { type: "text/vcard;charset=utf-8" });
+    downloadBlob(blob, "enesser.vcf");
+  }, []);
+
+  const downloadContactThroughAPIAndSaveAs = useCallback(async () => {
+    const response = await API.get("qrsapi", "/downloadcontact", {});
+    const blob = new Blob([response], { type: "text/vcard;charset=utf-8" });
+    saveAs(blob, "enesser.vcf");
+  }, []);
+
+  const downloadContactThroughS3AndBlob = useCallback(async () => {
+    const result = await Storage.get(`enesser.vcf`, {
+      level: "public",
+      download: true,
+    });
     downloadBlob(result?.Body, "enesser.vcf");
-    console.log(result);
+  }, []);
+
+  const downloadContactThroughS3AndSaveAs = useCallback(async () => {
+    const result: any = await Storage.get(`enesser.vcf`, {
+      level: "public",
+      download: true,
+    });
+    saveAs(result?.Body, "enesser.vcf");
   }, []);
 
   const uploadBlob = useCallback(async () => {
     const response = await API.get("qrsapi", "/downloadcontact", {});
-    // const blob = new Blob([response], { type: "text/vcard;charset=utf-8" });
     await Storage.put("enesser.vcf", response);
-    // downloadContact(blob);
-    // saveAs(blob, "enesser.vcf");
   }, []);
 
   return (
@@ -57,10 +72,28 @@ const VCards = () => {
         Upload contact
       </button>
       <button
-        onClick={downloadContact}
+        onClick={downloadContactThroughAPIAndBlob}
         className="h-10 bg-white rounded px-2 mt-10"
       >
-        Download contact
+        Download contact through API and Blob
+      </button>
+      <button
+        onClick={downloadContactThroughAPIAndSaveAs}
+        className="h-10 bg-white rounded px-2 mt-10"
+      >
+        Download contact through API and Save as
+      </button>
+      <button
+        onClick={downloadContactThroughS3AndBlob}
+        className="h-10 bg-white rounded px-2 mt-10"
+      >
+        Download contact through S3 and Blob
+      </button>
+      <button
+        onClick={downloadContactThroughS3AndSaveAs}
+        className="h-10 bg-white rounded px-2 mt-10"
+      >
+        Download contact through S3 and Save as
       </button>
     </div>
   );
