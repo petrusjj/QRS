@@ -1,14 +1,29 @@
 import { useCallback } from "react";
 import { API } from "aws-amplify";
-import { saveAs } from "file-saver";
+// import { saveAs } from "file-saver";
 
-type Props = {};
+const VCards = () => {
+  const downloadContact = useCallback((blob: Blob) => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "enesser";
+    const clickHandler = () => {
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+        a.removeEventListener("click", clickHandler);
+      }, 150);
+    };
+    a.addEventListener("click", clickHandler, false);
+    a.click();
+    return a;
+  }, []);
 
-const VCards = (props: Props) => {
-  const downloadContact = useCallback(async () => {
+  const fetchBlob = useCallback(async () => {
     const response = await API.get("qrsapi", "/downloadcontact", {});
     const blob = new Blob([response], { type: "text/vcard;charset=utf-8" });
-    saveAs(blob, "enesser.vcf");
+    downloadContact(blob);
+    // saveAs(blob, "enesser.vcf");
   }, []);
 
   return (
@@ -18,7 +33,7 @@ const VCards = (props: Props) => {
         alt="enesser"
         src="https://avatars2.githubusercontent.com/u/5659221?v=3&s=460"
       />
-      <button onClick={downloadContact} className="h-10 bg-white rounded px-2 mt-10">
+      <button onClick={fetchBlob} className="h-10 bg-white rounded px-2 mt-10">
         Download contact
       </button>
     </div>
