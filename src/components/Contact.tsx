@@ -12,8 +12,13 @@ const VCards = (props: Props) => {
   }, []);
 
   return (
-    <div className="h-screen flex grow items-center justify-center">
-      <button onClick={downloadContact} className="h-10 bg-white rounded px-2">
+    <div className="h-screen flex grow flex-col items-center justify-center">
+      <img
+        className="w-20 h20"
+        alt="enesser"
+        src="https://avatars2.githubusercontent.com/u/5659221?v=3&s=460"
+      />
+      <button onClick={downloadContact} className="h-10 bg-white rounded px-2 mt-10">
         Download contact
       </button>
     </div>
