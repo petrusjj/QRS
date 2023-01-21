@@ -10,6 +10,14 @@
       "StackName": "amplify-amplifyef76782dcd374-staging-83256",
       "StackId": "arn:aws:cloudformation:eu-west-1:897517238696:stack/amplify-amplifyef76782dcd374-staging-83256/346c7370-9966-11ed-a643-02c15a145e33",
       "AmplifyAppId": "d2j7wnl3f4cfoy"
+    },
+    "categories": {
+      "function": {
+        "downloadcontact": {
+          "deploymentBucketName": "amplify-amplifyef76782dcd374-staging-83256-deployment",
+          "s3Key": "amplify-builds/downloadcontact-746443514e64364b4330-build.zip"
+        }
+      }
     }
   }
 }
