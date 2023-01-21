@@ -1,4 +1,5 @@
-export const downloadBlob = (blob: any, filename: string) => {
+export const downloadBlob = (raw: any, filename: string) => {
+  const blob = new Blob([raw], { type: "text/vcard;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;

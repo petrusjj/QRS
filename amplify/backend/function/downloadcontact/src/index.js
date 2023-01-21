@@ -11,19 +11,19 @@ exports.handler = async (event) => {
   var vCard = vCardsJS();
 
   // set properties
-  vCard.firstName = "Eric";
-  vCard.middleName = "J";
-  vCard.lastName = "Nesser";
-  vCard.organization = "ACME Corporation";
+  vCard.firstName = "Petrus";
+  vCard.middleName = "van";
+  vCard.lastName = "Egeraat";
+  vCard.organization = "Pyypl";
   vCard.photo.attachFromUrl(
-    "https://avatars2.githubusercontent.com/u/5659221?v=3&s=460",
+    "https://avatars2.githubusercontent.com/u/876576?v=3&s=460",
     "JPEG"
   );
-  vCard.workPhone = "312-555-1212";
-  vCard.birthday = new Date(1985, 0, 1);
-  vCard.title = "Software Developer";
-  vCard.url = "https://github.com/enesser";
-  vCard.note = "Notes on Eric";
+  vCard.workPhone = "+971 54 496 5771";
+  vCard.birthday = new Date(1992, 11, 4);
+  vCard.title = "Software Engineer";
+  vCard.url = "https://www.linkedin.com/in/petervanegeraat/";
+  vCard.note = "Notes on Petrus";
 
   // get as formatted string
   const string = vCard.getFormattedString();
@@ -33,8 +33,8 @@ exports.handler = async (event) => {
   return {
     statusCode: 200,
     headers: {
-      "Content-Type": 'text/vcard; name="enesser.vcf"',
-      "Content-Disposition": 'inline; filename="enesser.vcf"',
+      "Content-Type": 'text/vcard; name="petrus.vcf"',
+      "Content-Disposition": 'inline; filename="petrus.vcf"',
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Headers": "*",
     },

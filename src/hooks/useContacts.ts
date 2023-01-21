@@ -9,17 +9,16 @@ const useContacts = () => {
   }, []);
 
   const downloadContact = useCallback(async () => {
-    const result: any = await Storage.get(`enesser.vcf`, {
+    const result: any = await Storage.get(`petrus.vcf`, {
       level: "public",
       download: true,
     });
-    const blob = new Blob([result.Body], { type: "text/vcard;charset=utf-8" });
-    downloadBlob(blob, "enesser.vcf");
+    downloadBlob(result?.Body, "petrus.vcf");
   }, []);
 
   const uploadContact = useCallback(async () => {
     const response = await API.get("qrsapi", "/downloadcontact", {});
-    await Storage.put("enesser.vcf", response);
+    await Storage.put("petrus.vcf", response);
   }, []);
 
   return { getContacts, downloadContact, uploadContact };
