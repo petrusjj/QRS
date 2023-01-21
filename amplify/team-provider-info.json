@@ -15,7 +15,7 @@
       "function": {
         "downloadcontact": {
           "deploymentBucketName": "amplify-amplifyef76782dcd374-staging-83256-deployment",
-          "s3Key": "amplify-builds/downloadcontact-74414d6553487a5a4654-build.zip"
+          "s3Key": "amplify-builds/downloadcontact-4268794e4d5a4b526937-build.zip"
         }
       },
       "api": {

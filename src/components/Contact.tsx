@@ -15,12 +15,12 @@ const VCards = () => {
         alt="petrus"
         src="https://avatars2.githubusercontent.com/u/876576?v=3&s=460"
       />
-      <button
+      {/* <button
         onClick={uploadContact}
         className="h-10 bg-white rounded px-2 mt-10"
       >
         Upload contact
-      </button>
+      </button> */}
       <button
         onClick={downloadContact}
         className="h-10 bg-white rounded px-2 mt-10"
