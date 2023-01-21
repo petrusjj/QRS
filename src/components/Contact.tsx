@@ -12,7 +12,7 @@ const VCards = (props: Props) => {
 
   return (
     <div className="h-screen flex grow items-center justify-center">
-      <button onClick={downloadContact} className="h-10 bg-red-500">
+      <button onClick={downloadContact} className="h-10 bg-white rounded px-2">
         Download contact
       </button>
     </div>
