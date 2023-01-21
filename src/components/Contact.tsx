@@ -31,6 +31,7 @@ const VCards = () => {
   // https://docs.amplify.aws/lib/storage/download/q/platform/js/#file-download-option
   // https://www.reddit.com/r/learnprogramming/comments/ei9f2b/comment/fcp2ath/?utm_source=share&utm_medium=web2x&context=3
   const downloadContact = useCallback(async () => {
+    await Storage.configure({ level: "public" });
     const result = await Storage.get(`enesser.vcf`, { download: true });
     console.log(result);
     downloadBlob(result?.Body, "enesser.vcf");
