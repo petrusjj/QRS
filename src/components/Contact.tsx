@@ -1,13 +1,22 @@
-import { useCallback } from "react";
-import { API } from "aws-amplify";
+import { useCallback, useEffect } from "react";
+import { API, Storage } from "aws-amplify";
 // import { saveAs } from "file-saver";
 
 const VCards = () => {
-  const downloadContact = useCallback((blob: Blob) => {
+  useEffect(() => {
+    getContacts();
+  }, []);
+
+  const getContacts = useCallback(async () => {
+    const list = await Storage.list("", { pageSize: "ALL" });
+    console.log(list);
+  }, []);
+
+  const downloadBlob = (blob: any, filename: string) => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "enesser";
+    a.download = filename || "download";
     const clickHandler = () => {
       setTimeout(() => {
         URL.revokeObjectURL(url);
@@ -17,12 +26,22 @@ const VCards = () => {
     a.addEventListener("click", clickHandler, false);
     a.click();
     return a;
+  };
+
+  // https://docs.amplify.aws/lib/storage/download/q/platform/js/#file-download-option
+  // https://www.reddit.com/r/learnprogramming/comments/ei9f2b/comment/fcp2ath/?utm_source=share&utm_medium=web2x&context=3
+  const downloadContact = useCallback(async () => {
+    const result = await Storage.get(`enesser.vcf`, { download: true });
+    console.log(result);
+    downloadBlob(result?.Body, "enesser.vcf");
+    console.log(result);
   }, []);
 
-  const fetchBlob = useCallback(async () => {
+  const uploadBlob = useCallback(async () => {
     const response = await API.get("qrsapi", "/downloadcontact", {});
-    const blob = new Blob([response], { type: "text/vcard;charset=utf-8" });
-    downloadContact(blob);
+    // const blob = new Blob([response], { type: "text/vcard;charset=utf-8" });
+    await Storage.put("enesser.vcf", response);
+    // downloadContact(blob);
     // saveAs(blob, "enesser.vcf");
   }, []);
 
@@ -33,7 +52,13 @@ const VCards = () => {
         alt="enesser"
         src="https://avatars2.githubusercontent.com/u/5659221?v=3&s=460"
       />
-      <button onClick={fetchBlob} className="h-10 bg-white rounded px-2 mt-10">
+      <button onClick={uploadBlob} className="h-10 bg-white rounded px-2 mt-10">
+        Upload contact
+      </button>
+      <button
+        onClick={downloadContact}
+        className="h-10 bg-white rounded px-2 mt-10"
+      >
         Download contact
       </button>
     </div>

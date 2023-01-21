@@ -1,0 +1,16 @@
+{
+  "resourceName": "qrss3",
+  "policyUUID": "55e7c890",
+  "bucketName": "contacts",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}
